@@ -50,7 +50,7 @@
           container: container,
           audio: songs,
           autoplay: urlParams.get('autoplay') || false,
-          theme: `#${urlParams.get('theme')}` || '#AD7A86',       /* 主题色，可根据需求修改 */
+          theme: `#${urlParams.get('theme') || 'AD7A86'}`,       /* 主题色，可根据需求修改 */
           loop: urlParams.get('loop') || 'all',            /* 循环模式：all/one/none */
           volume: urlParams.get('volume') || 0.7,            /* 音量：0-1 */
           lrcType: urlParams.get('lrcType') || 3,             /* 滚动歌词（全屏更适配） */
