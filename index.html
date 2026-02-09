@@ -34,6 +34,7 @@
 
       // 配置（URL参数优先，兜底默认值）
       const config = {
+        api: urlParams.get('api') || 'https://api.i-meto.com/meting/api',
         server: urlParams.get('server') || 'netease',
         type: urlParams.get('type') || 'playlist',
         id: urlParams.get('id') || '755597177'
@@ -41,7 +42,7 @@
 
       try {
         // 1. 调用MetingJS的API获取音乐数据（核心接口）
-        const data = await fetch(`https://api.i-meto.com/meting/api?server=${config.server}&type=${config.type}&id=${config.id}`);
+        const data = await fetch(`${config.api}?server=${config.server}&type=${config.type}&id=${config.id}`);
         const songs = await data.json();
 
         // 2. 手动初始化APlayer（适配全屏样式）
@@ -49,7 +50,7 @@
           container: container,
           audio: songs,
           autoplay: urlParams.get('autoplay') || false,
-          theme: urlParams.get('theme') || '#AD7A86',       /* 主题色，可根据需求修改 */
+          theme: `#${urlParams.get('theme')}` || '#AD7A86',       /* 主题色，可根据需求修改 */
           loop: urlParams.get('loop') || 'all',            /* 循环模式：all/one/none */
           volume: urlParams.get('volume') || 0.7,            /* 音量：0-1 */
           lrcType: urlParams.get('lrcType') || 3,             /* 滚动歌词（全屏更适配） */
